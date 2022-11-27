@@ -71,9 +71,9 @@ public class TestConfig implements CommandLineRunner {
 		Cliente usuario1 = new Cliente(null, "Rafael", "rafael@mail.com", "123456", "85984316990", "Rua Capitão Brasil, 171");
 		Cliente usuario2 = new Cliente(null, "Cleo", "cleo@mail.com", "123456", "85984316990", "Rua Capitão Brasil, 171");
 		
-		Pedido pedido1 = new Pedido(null, Instant.parse("2022-10-10T21:53:10Z"), StatusPedido.APROVADO, usuario1);
-		Pedido pedido2 = new Pedido(null, Instant.parse("2022-10-09T20:45:10Z"), StatusPedido.ENTREGUE, usuario2);
-		Pedido pedido3 = new Pedido(null, Instant.parse("2022-10-09T21:45:10Z"), StatusPedido.FINALIZADO, usuario1);		
+		Pedido pedido1 = new Pedido(null, Instant.parse("2022-10-10T21:53:10Z"), StatusPedido.APROVADO, usuario1, restaurante1);
+		Pedido pedido2 = new Pedido(null, Instant.parse("2022-10-09T20:45:10Z"), StatusPedido.ENTREGUE, usuario2, restaurante2);
+		Pedido pedido3 = new Pedido(null, Instant.parse("2022-10-09T21:45:10Z"), StatusPedido.FINALIZADO, usuario1, restaurante3);		
 		
 		usuarioRepository.saveAll(Arrays.asList(usuario1, usuario2));		
 		pedidoRepository.saveAll(Arrays.asList(pedido1, pedido2, pedido3));		

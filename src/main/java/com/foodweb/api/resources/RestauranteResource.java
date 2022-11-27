@@ -30,15 +30,21 @@ public class RestauranteResource {
 		return ResponseEntity.ok().body(listaDeRestaurantes);
 	}
 	
+	@GetMapping(value = "/{idrestaurante}")
+	public ResponseEntity<Restaurante> encontraRestaurantePorId(@PathVariable("idrestaurante") Long idRestaurante) {
+		Restaurante restaurante = restauranteService.encontraRestaurantePorId(idRestaurante);
+		return ResponseEntity.ok().body(restaurante);
+	}
+	
 	@GetMapping(value = "/{idrestaurante}/produtos")
-	public ResponseEntity<List<Produto>> findProductsByRestaurante(@PathVariable("idrestaurante") Long restauranteId) {
-		List<Produto> listaDeProdutosDoRestaurante = restauranteService.findProductsByRestaurante(restauranteId);
+	public ResponseEntity<List<Produto>> encontraProdutosDoRestaurante(@PathVariable("idrestaurante") Long restauranteId) {
+		List<Produto> listaDeProdutosDoRestaurante = restauranteService.encontraProdutosPorRestaurante(restauranteId);
 		return ResponseEntity.ok().body(listaDeProdutosDoRestaurante);
 	}
 	
 	@PostMapping
 	public ResponseEntity<Restaurante> insert(@RequestBody Restaurante restaurante) {
-		restaurante = restauranteService.insert(restaurante);
+		restaurante = restauranteService.inserir(restaurante);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(restaurante.getId()).toUri();
 		return ResponseEntity.created(uri).body(restaurante);
 	}
