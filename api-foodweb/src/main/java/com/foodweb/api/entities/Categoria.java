@@ -9,10 +9,13 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
 @Table(name = "categorias")
@@ -29,14 +32,20 @@ public class Categoria implements Serializable {
 	@ManyToMany(mappedBy = "categorias")
 	private Set<Produto> produtos = new HashSet<>();
 	
+	@JsonIgnore
+	@ManyToOne
+	@JoinColumn(name = "restaurante_id")
+	private Restaurante restaurante;
+	
 	public Categoria() {
 		
 	}
 
-	public Categoria(Long id, String nome) {
+	public Categoria(Long id, String nome, Restaurante restaurante) {
 		super();
 		this.id = id;
 		this.nome = nome;
+		this.restaurante = restaurante;
 	}
 
 	public Long getId() {
@@ -47,14 +56,24 @@ public class Categoria implements Serializable {
 		this.id = id;
 	}
 
-	public String getName() {
+	public String getNome() {
 		return nome;
 	}
 
-	public void setName(String nome) {
+	public void setNome(String nome) {
 		this.nome = nome;
 	}
 	
+	@JsonIgnore
+	public Restaurante getRestaurante() {
+		return restaurante;
+	}
+
+	@JsonProperty
+	public void setRestaurante(Restaurante restaurante) {
+		this.restaurante = restaurante;
+	}
+
 	public Set<Produto> getProdutos() {
 		return produtos;
 	}

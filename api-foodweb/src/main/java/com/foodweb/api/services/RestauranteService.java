@@ -23,12 +23,17 @@ public class RestauranteService {
 		return restauranteRepository.findAll();
 	}
 	
+	public Restaurante encontraRestaurantePorId(Long idRestaurante) {
+		Optional<Restaurante> restaurante = restauranteRepository.findById(idRestaurante);
+		return restaurante.orElseThrow(() -> new ResourceNotFoundException(idRestaurante, "Restaurante não encontrado. ID: "));
+	}
+	
 	public Restaurante encontraRestaurantePorEmailESenha(String email, String password) {
 		Optional<Restaurante> restaurante = restauranteRepository.encontraRestaurantePorEmailESenha(email, password);
 		return restaurante.orElseThrow(() -> new ResourceNotFoundException(email, "E-mail não cadastrado: "));
 	}
 	
-	public Restaurante insert(Restaurante restaurante) {
+	public Restaurante inserir(Restaurante restaurante) {
 		try {
 			return restauranteRepository.save(restaurante);
 		} catch (DataIntegrityViolationException e) {
@@ -36,7 +41,7 @@ public class RestauranteService {
 		}
 	}
 	
-	public List<Produto> findProductsByRestaurante(Long idRestaurante) {
+	public List<Produto> encontraProdutosPorRestaurante(Long idRestaurante) {
 		return restauranteRepository.findProductsByRestaurante(idRestaurante);
 	}
 

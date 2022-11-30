@@ -24,7 +24,12 @@ public class CategoriaService {
 		return obj.get();
 	}
 	
-	public Categoria insert(Categoria categoria) {
+	public List<Categoria> encontraRestaurantePorId(Long idRestaurante) {
+		List<Categoria> listaDeCategorias = categoriaRepository.encontraCategoriasPorRestaurante(idRestaurante);
+		return listaDeCategorias;
+	}
+	
+	public Categoria inserir(Categoria categoria) {
 		return categoriaRepository.save(categoria);
 	}
 

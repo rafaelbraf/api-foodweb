@@ -10,7 +10,7 @@ import javax.persistence.Table;
 import com.foodweb.api.entities.pk.ProdutoDoRestaurantePK;
 
 @Entity
-@Table(name = "produtos_do_restaurante")
+@Table(name = "produtos_dos_restaurantes")
 public class ProdutoDoRestaurante implements Serializable {
 	
 	private static final long serialVersionUID = 1L;

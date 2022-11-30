@@ -6,29 +6,27 @@ import java.util.Objects;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-import com.foodweb.api.entities.Produto;
+import com.foodweb.api.entities.Categoria;
 import com.foodweb.api.entities.Restaurante;
 
-public class ProdutoDoRestaurantePK implements Serializable {
-	
+public class CategoriaDoRestaurantePK implements Serializable{
+
 	private static final long serialVersionUID = 1L;
 	
-	// Variáveis
 	@ManyToOne
-	@JoinColumn(name = "produto_id")
-	private Produto produto;
+	@JoinColumn(name = "categoria_id")
+	private Categoria categoria;
 	
 	@ManyToOne
 	@JoinColumn(name = "restaurante_id")
 	private Restaurante restaurante;
 
-	// Getters e Setters
-	public Produto getProduto() {
-		return produto;
+	public Categoria getCategoria() {
+		return categoria;
 	}
 
-	public void setProduto(Produto produto) {
-		this.produto = produto;
+	public void setCategoria(Categoria categoria) {
+		this.categoria = categoria;
 	}
 
 	public Restaurante getRestaurante() {
@@ -39,10 +37,9 @@ public class ProdutoDoRestaurantePK implements Serializable {
 		this.restaurante = restaurante;
 	}
 
-	// Hash Code e Equals
 	@Override
 	public int hashCode() {
-		return Objects.hash(produto, restaurante);
+		return Objects.hash(categoria, restaurante);
 	}
 
 	@Override
@@ -53,8 +50,8 @@ public class ProdutoDoRestaurantePK implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		ProdutoDoRestaurantePK other = (ProdutoDoRestaurantePK) obj;
-		return Objects.equals(produto, other.produto) && Objects.equals(restaurante, other.restaurante);
+		CategoriaDoRestaurantePK other = (CategoriaDoRestaurantePK) obj;
+		return Objects.equals(categoria, other.categoria) && Objects.equals(restaurante, other.restaurante);
 	}
 
 }

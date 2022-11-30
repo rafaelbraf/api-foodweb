@@ -29,7 +29,10 @@ public class Restaurante {
 	private String endereco;
 	
 	@OneToMany(mappedBy = "id.restaurante")
-	private Set<ProdutoDoRestaurante> produtosDoRestaurante = new HashSet<>();	
+	private Set<ProdutoDoRestaurante> produtosDoRestaurante = new HashSet<>();
+	
+	@OneToMany(mappedBy = "id.restaurante")
+	private Set<PedidoDoRestaurante> pedidosDoRestaurante = new HashSet<>();
 	
 	// Construtores
 	public Restaurante() {
@@ -114,7 +117,12 @@ public class Restaurante {
 	public Set<ProdutoDoRestaurante> getProdutosDoRestaurante() {
 		return produtosDoRestaurante;
 	}
-
+	
+	@JsonIgnore
+	public Set<PedidoDoRestaurante> getPedidosDoRestaurante() {
+		return pedidosDoRestaurante;
+	}
+	
 	// Hash Code e Equals
 	@Override
 	public int hashCode() {

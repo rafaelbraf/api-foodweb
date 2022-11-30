@@ -36,6 +36,10 @@ public class Pedido implements Serializable {
 	private Integer statusPedido;
 	
 	@ManyToOne
+	@JoinColumn(name = "restaurante_id")
+	private Restaurante restaurante;
+	
+	@ManyToOne
 	@JoinColumn(name = "cliente_id")
 	private Cliente cliente;
 	
@@ -49,12 +53,13 @@ public class Pedido implements Serializable {
 		
 	}
 
-	public Pedido(Long id, Instant moment, StatusPedido statusPedido, Cliente cliente) {
+	public Pedido(Long id, Instant moment, StatusPedido statusPedido, Cliente cliente, Restaurante restaurante) {
 		super();
 		this.id = id;
 		this.moment = moment;
 		setStatusPedido(statusPedido);
 		this.cliente = cliente;
+		this.restaurante = restaurante;
 	}
 
 	public Long getId() {
@@ -72,14 +77,22 @@ public class Pedido implements Serializable {
 	public void setMoment(Instant moment) {
 		this.moment = moment;
 	}
-
+	
+	public Restaurante getRestaurante() {
+		return restaurante;
+	}
+	
+	public void setRestaurante(Restaurante restaurante) {
+		this.restaurante = restaurante;
+	}
+	
 	public Cliente getCliente() {
 		return cliente;
 	}
 
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
-	}	
+	}
 
 	public StatusPedido getStatusPedido() {
 		return StatusPedido.valueOf(statusPedido);

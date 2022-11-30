@@ -23,7 +23,7 @@ public class CategoriaResource {
 	@Autowired
 	private CategoriaService categoriaService;
 
-	@GetMapping
+	@GetMapping(value = "/")
 	public ResponseEntity<List<Categoria>> findAll(){		
 		List<Categoria> listaDecategorias = categoriaService.findAll();		
 		return ResponseEntity.ok().body(listaDecategorias);
@@ -35,9 +35,15 @@ public class CategoriaResource {
 		return ResponseEntity.ok().body(categoria);
 	}
 	
+	@GetMapping(value = "/restaurante/{idRestaurante}")
+	public ResponseEntity<List<Categoria>> encontraCategoriasPorRestaurante(@PathVariable Long idRestaurante) {
+		List<Categoria> listaDeCategorias = categoriaService.encontraRestaurantePorId(idRestaurante);
+		return ResponseEntity.ok().body(listaDeCategorias);
+	}
+	
 	@PostMapping
 	public ResponseEntity<Categoria> insert(@RequestBody Categoria categoria) {
-		categoria = categoriaService.insert(categoria);
+		categoria = categoriaService.inserir(categoria);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(categoria.getId()).toUri();
 		return ResponseEntity.created(uri).body(categoria);
 	}

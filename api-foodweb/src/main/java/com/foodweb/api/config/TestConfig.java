@@ -43,13 +43,13 @@ public class TestConfig implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		
-		Categoria categoria1 = new Categoria(null, "Eletrônicos");
-		Categoria categoria2 = new Categoria(null, "Livros");
-		Categoria categoria3 = new Categoria(null, "Computadores");
-		
 		Restaurante restaurante1 = new Restaurante(null, "Pizzaria Top1", "00000000002", "pizzariatop@mail.com", "123456", "85988888888", "Rua 1 - Antônio Bezerra");
 		Restaurante restaurante2 = new Restaurante(null, "Pizzaria Top2", "00000000002", "pizzariatop@mail.com", "123456", "85988888888", "Rua 1 - Antônio Bezerra");
 		Restaurante restaurante3 = new Restaurante(null, "Pizzaria Top3", "00000000002", "pizzariatop@mail.com", "123456", "85988888888", "Rua 1 - Antônio Bezerra");
+		
+		Categoria categoria1 = new Categoria(null, "Eletrônicos", restaurante1);
+		Categoria categoria2 = new Categoria(null, "Livros", restaurante1);
+		Categoria categoria3 = new Categoria(null, "Computadores", restaurante2);
 		
 		Produto produto1 = new Produto(null, "Galaxy A22", "Smartphone Samsung Galaxy A22 6,5'", 1300.00, "http://img.com", restaurante1);
 		Produto produto2 = new Produto(null, "Notebook Acer Nitro 5", "Notebook Acer Nitro 5 Windows 10 GTX 1650'", 5600.00, "http://img.com", restaurante1);
@@ -71,9 +71,9 @@ public class TestConfig implements CommandLineRunner {
 		Cliente usuario1 = new Cliente(null, "Rafael", "rafael@mail.com", "123456", "85984316990", "Rua Capitão Brasil, 171");
 		Cliente usuario2 = new Cliente(null, "Cleo", "cleo@mail.com", "123456", "85984316990", "Rua Capitão Brasil, 171");
 		
-		Pedido pedido1 = new Pedido(null, Instant.parse("2022-10-10T21:53:10Z"), StatusPedido.APROVADO, usuario1);
-		Pedido pedido2 = new Pedido(null, Instant.parse("2022-10-09T20:45:10Z"), StatusPedido.ENTREGUE, usuario2);
-		Pedido pedido3 = new Pedido(null, Instant.parse("2022-10-09T21:45:10Z"), StatusPedido.FINALIZADO, usuario1);		
+		Pedido pedido1 = new Pedido(null, Instant.parse("2022-10-10T21:53:10Z"), StatusPedido.APROVADO, usuario1, restaurante1);
+		Pedido pedido2 = new Pedido(null, Instant.parse("2022-10-09T20:45:10Z"), StatusPedido.ENTREGUE, usuario2, restaurante2);
+		Pedido pedido3 = new Pedido(null, Instant.parse("2022-10-09T21:45:10Z"), StatusPedido.FINALIZADO, usuario1, restaurante3);		
 		
 		usuarioRepository.saveAll(Arrays.asList(usuario1, usuario2));		
 		pedidoRepository.saveAll(Arrays.asList(pedido1, pedido2, pedido3));		
